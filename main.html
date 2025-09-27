@@ -62,7 +62,45 @@
     </div>
 
     <script>
-        console.log('✅ 页面已加载');
+        // 路径验证逻辑
+        function validatePath() {
+            // 获取URL参数中的path
+            const urlParams = new URLSearchParams(window.location.search);
+            const currentPath = urlParams.get('path');
+            
+            // 从localStorage获取有效路径
+            const validPath = localStorage.getItem('validPath');
+            
+            // 如果没有有效路径，设置初始路径
+            if (!validPath) {
+                localStorage.setItem('validPath', 'Smqoal66yAWajLfdytPf');
+                if (currentPath !== 'Smqoal66yAWajLfdytPf') {
+                    redirectToExpired();
+                    return false;
+                }
+            } else {
+                // 检查当前路径是否有效
+                if (currentPath !== validPath) {
+                    redirectToExpired();
+                    return false;
+                }
+            }
+            
+            return true;
+        }
+        
+        // 重定向到失效页面
+        function redirectToExpired() {
+            window.location.href = 'expired.html';
+        }
+        
+        // 页面加载时验证路径
+        if (!validatePath()) {
+            // 如果验证失败，不继续执行
+            return;
+        }
+        
+        console.log('✅ 页面已加载，路径验证通过');
     </script>
 </body>
 </html>
