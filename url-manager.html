@@ -65,7 +65,7 @@
         
         <div class="status">
             <strong>✅ 服务状态：</strong>正常运行<br>
-            <strong>🌐 基础域名：</strong>https://用户名.github.io/xhj<br>
+            <strong>🌐 基础域名：</strong>https://yiben-byte.github.io<br>
             <strong>⚠️ 注意：</strong>根域名无效，需要随机路径才能访问
         </div>
         
@@ -88,7 +88,7 @@
     </div>
 
     <script>
-        const BASE_URL = 'https://yiben-byte.github.io/xhj-share'; // 实际域名
+        const BASE_URL = 'https://yiben-byte.github.io/xhj-share'; // Vercel域名
         let currentUrl = '';
         
         // 生成随机字符串
@@ -104,16 +104,17 @@
         // 生成新URL
         function generateNewUrl() {
             const randomString = generateRandomString();
-            currentUrl = `${BASE_URL}/main.html?path=${randomString}`;
-            
-            // 更新localStorage中的有效路径，使旧网址失效
-            localStorage.setItem('validPath', randomString);
+            const timestamp = Date.now();
+            currentUrl = `${BASE_URL}/main.html?path=${randomString}&valid=${randomString}&time=${timestamp}`;
             
             // 更新显示
             document.getElementById('currentUrl').href = currentUrl;
             document.getElementById('currentUrl').textContent = currentUrl;
             
-            alert('✅ 新网址已生成！\n\n注意：旧网址已失效，只有新网址可以访问。');
+            // 更新localStorage中的最新网址时间戳，强制旧网址失效
+            localStorage.setItem('latestUrlTime', timestamp);
+            
+            alert('✅ 新网址已生成！\n\n注意：生成的网址包含时间戳，6小时内有效。\n旧网址已失效，只有新网址可以访问。\n\n跨设备失效：旧网址在其他设备上6小时后失效。');
         }
         
         // 创建新的HTML文件
