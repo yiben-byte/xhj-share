@@ -104,14 +104,11 @@
         // 生成新URL
         function generateNewUrl() {
             const randomString = generateRandomString();
-            currentUrl = `${BASE_URL}/${randomString}.html`;
+            currentUrl = `${BASE_URL}/main.html?path=${randomString}`;
             
             // 更新显示
             document.getElementById('currentUrl').href = currentUrl;
             document.getElementById('currentUrl').textContent = currentUrl;
-            
-            // 创建新的HTML文件（模拟）
-            createNewHtmlFile(randomString);
             
             alert('✅ 新网址已生成！');
         }
