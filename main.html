@@ -68,29 +68,23 @@
             const urlParams = new URLSearchParams(window.location.search);
             const currentPath = urlParams.get('path');
             
-            // 从localStorage获取有效路径
-            const validPath = localStorage.getItem('validPath');
+            // 硬编码的有效路径列表（初始只有Smqoal66yAWajLfdytPf）
+            const validPaths = ['Smqoal66yAWajLfdytPf'];
             
-            // 如果没有有效路径，设置初始路径
-            if (!validPath) {
-                localStorage.setItem('validPath', 'Smqoal66yAWajLfdytPf');
-                if (currentPath !== 'Smqoal66yAWajLfdytPf') {
-                    redirectToExpired();
-                    return false;
-                }
-            } else {
-                // 检查当前路径是否有效
-                if (currentPath !== validPath) {
-                    redirectToExpired();
-                    return false;
-                }
+            // 检查当前路径是否在有效列表中
+            if (!validPaths.includes(currentPath)) {
+                console.log('❌ 路径无效:', currentPath);
+                redirectToExpired();
+                return false;
             }
             
+            console.log('✅ 路径有效:', currentPath);
             return true;
         }
         
         // 重定向到失效页面
         function redirectToExpired() {
+            console.log('🔄 重定向到失效页面');
             window.location.href = 'expired.html';
         }
         
