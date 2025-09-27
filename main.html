@@ -4,6 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>购买永久独享账号、节点、海外账号点我</title>
+    <script>
+        // 页面加载前立即验证路径
+        (function() {
+            // 获取URL参数中的path
+            const urlParams = new URLSearchParams(window.location.search);
+            const currentPath = urlParams.get('path');
+            
+            // 硬编码的有效路径列表（初始只有Smqoal66yAWajLfdytPf）
+            const validPaths = ['Smqoal66yAWajLfdytPf'];
+            
+            // 检查当前路径是否在有效列表中
+            if (!validPaths.includes(currentPath)) {
+                console.log('❌ 路径无效:', currentPath);
+                window.location.href = 'expired.html';
+                return;
+            }
+            
+            console.log('✅ 路径有效:', currentPath);
+        })();
+    </script>
     <style>
         body {
             margin: 0;
@@ -62,38 +82,6 @@
     </div>
 
     <script>
-        // 路径验证逻辑
-        function validatePath() {
-            // 获取URL参数中的path
-            const urlParams = new URLSearchParams(window.location.search);
-            const currentPath = urlParams.get('path');
-            
-            // 硬编码的有效路径列表（初始只有Smqoal66yAWajLfdytPf）
-            const validPaths = ['Smqoal66yAWajLfdytPf'];
-            
-            // 检查当前路径是否在有效列表中
-            if (!validPaths.includes(currentPath)) {
-                console.log('❌ 路径无效:', currentPath);
-                redirectToExpired();
-                return false;
-            }
-            
-            console.log('✅ 路径有效:', currentPath);
-            return true;
-        }
-        
-        // 重定向到失效页面
-        function redirectToExpired() {
-            console.log('🔄 重定向到失效页面');
-            window.location.href = 'expired.html';
-        }
-        
-        // 页面加载时验证路径
-        if (!validatePath()) {
-            // 如果验证失败，不继续执行
-            return;
-        }
-        
         console.log('✅ 页面已加载，路径验证通过');
     </script>
 </body>
