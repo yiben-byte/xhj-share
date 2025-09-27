@@ -12,14 +12,18 @@
                 const urlParams = new URLSearchParams(window.location.search);
                 const currentPath = urlParams.get('path');
                 
-                // 硬编码的有效路径列表（初始只有Smqoal66yAWajLfdytPf）
-                const validPaths = ['Smqoal66yAWajLfdytPf'];
+                // 从localStorage获取有效路径，如果没有则使用默认值
+                let validPath = localStorage.getItem('validPath');
+                if (!validPath) {
+                    validPath = 'Smqoal66yAWajLfdytPf';
+                    localStorage.setItem('validPath', validPath);
+                }
                 
-                // 检查当前路径是否在有效列表中
-                if (!validPaths.includes(currentPath)) {
-                    console.log('❌ 路径无效:', currentPath);
+                // 检查当前路径是否有效
+                if (currentPath !== validPath) {
+                    console.log('❌ 路径无效:', currentPath, '有效路径:', validPath);
                     // 立即重定向，阻止页面渲染
-                    window.location.replace('expired.html');
+                    window.location.replace('expired.html?v=' + Date.now());
                     return;
                 }
                 
@@ -27,7 +31,7 @@
             } catch (error) {
                 console.error('验证错误:', error);
                 // 出错时也重定向到失效页面
-                window.location.replace('expired.html');
+                window.location.replace('expired.html?v=' + Date.now());
             }
         })();
     </script>
