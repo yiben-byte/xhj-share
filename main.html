@@ -32,11 +32,11 @@
                     return;
                 }
                 
-                // 检查时间戳是否有效（6小时内，实现跨设备失效）
+                // 检查时间戳是否有效（12小时内，实现跨设备失效）
                 const currentTime = Date.now();
                 const urlTimestamp = parseInt(urlTime);
                 const timeDiff = currentTime - urlTimestamp;
-                const maxAge = 6 * 60 * 60 * 1000; // 6小时
+                const maxAge = 12 * 60 * 60 * 1000; // 12小时
                 
                 if (timeDiff > maxAge) {
                     console.log('❌ 网址已过期:', timeDiff, 'ms');
